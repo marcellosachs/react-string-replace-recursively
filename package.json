@@ -1,6 +1,6 @@
 {
   "name": "patternReplacer",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "more abstract version of javascript's .replace method used basically for exacting functions on parts of text",
   "main": "index.js",
   "scripts": {
