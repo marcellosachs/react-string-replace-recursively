@@ -1,0 +1,30 @@
+{
+  "name": "replacer",
+  "version": "0.1.0",
+  "description": "more abstract version of javascript's .replace method used basically for exacting functions on parts of text",
+  "main": "index.js",
+  "scripts": {
+    "test": "make test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marcellosachs/replacer.git"
+  },
+  "keywords": [
+    ".replace",
+    "regular",
+    "expression",
+    "regex",
+    "match"
+  ],
+  "author": "Marcello Sachs <marcello.sachs@gmail.com> (https://github.com/marcellosachs)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/marcellosachs/replacer/issues"
+  },
+  "homepage": "https://github.com/marcellosachs/replacer#readme",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^2.4.5"
+  }
+}
