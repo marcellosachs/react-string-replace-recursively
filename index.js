@@ -1,7 +1,1 @@
-module.exports = {
-
-  function1: function () {
-    console.log('hi')
-    return 'great';
-  }
-}
+module.exports = require('./lib/patternReplacerCreator')
