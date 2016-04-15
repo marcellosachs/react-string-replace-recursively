@@ -1,2 +1,2 @@
-const patternReplacer = require('./lib/patternReplacerCreator');
-module.exports = patternReplacer;
+var patternReplacerCreator = require('./lib/patternReplacerCreator');
+module.exports = patternReplacerCreator;
