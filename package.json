@@ -1,6 +1,6 @@
 {
   "name": "patternReplacer",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "description": "more abstract version of javascript's .replace method useful for replacing substrings with React components",
   "main": "index.js",
   "scripts": {
