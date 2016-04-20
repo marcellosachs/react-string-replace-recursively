@@ -1,10 +1,6 @@
 {
   "name": "patternReplacer",
-<<<<<<< HEAD
-  "version": "0.1.4",
-=======
-  "version": "0.1.2",
->>>>>>> 59a30f9... bump version in package.json
+  "version": "0.1.5",
   "description": "more abstract version of javascript's .replace method used basically for exacting functions on parts of text",
   "main": "index.js",
   "scripts": {
