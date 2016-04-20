@@ -1,11 +1,11 @@
 {
   "name": "patternReplacer",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "more abstract version of javascript's .replace method used basically for exacting functions on parts of text",
   "main": "index.js",
   "scripts": {
     "test": "mocha --compilers js:babel-core/register 'test/**/*.@(js|jsx)'",
-     "build": "babel src -d lib"
+    "build": "babel src -d lib"
   },
   "repository": {
     "type": "git",
