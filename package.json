@@ -1,7 +1,7 @@
 {
   "name": "patternReplacer",
   "version": "0.1.11",
-  "description": "more abstract version of javascript's .replace method used basically for exacting functions on parts of text",
+  "description": "more abstract version of javascript's .replace method useful for replacing substrings with React components",
   "main": "index.js",
   "scripts": {
     "test": "mocha --compilers js:babel-core/register 'test/**/*.@(js|jsx)'",
@@ -13,6 +13,10 @@
   },
   "keywords": [
     ".replace",
+    "replace",
+    "react",
+    "react.js",
+    "reactjs",
     "regular",
     "expression",
     "regex",
