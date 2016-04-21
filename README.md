@@ -8,12 +8,11 @@
 ```
 var reactPatternReplace = require('react-pattern-replace');
 var config = {
-    'hashTag': {
-       pattern: /(#[a-z\d][\w-]*)/ig,
-       matcherFn: function (rawText, processed) {
-         return <Link to={"tags/" + rawText}>{processed}</Link>
-      }
-    },
+  'hashTag': {
+    pattern: /(#[a-z\d][\w-]*)/ig,
+    matcherFn: function (rawText, processed) {
+    return <Link to={"tags/" + rawText}>{processed}</Link>
+  },
   'searchTerm': {
     pattern: /(chair)/ig,
     matcherFn: function () {
@@ -22,7 +21,7 @@ var config = {
   }
 };
 
-var inputString = "what a great #chairman he is";
+var inputString = "I appreciate a good #chairback I must say";
 var result = reactPatternReplace(config)(inputString);
 var parent = <ParentComponent>{result}</ParentComponent>;
 ```
@@ -30,11 +29,12 @@ This would amount to doing :
 ```
 var parent = (
   <ParentComponent>
-    ["what a great",
-     <Link to={"tags/#chairman"}>
+    ["I appreciate a good",
+     <Link to={"tags/#chairback"}>
        [<span className='search-term-match'>chair</span>,
-        "man"]
-     </Link>]
+        "back"]
+     </Link>,
+     " I must say"]
   </ParentComponent>
 );
 ```
@@ -42,7 +42,7 @@ var parent = (
 Note that the `matcherFn` has two parameters : `rawText` and `processed`.
 The `rawText` corresponds to the section of the string which matches the pattern.
 The `processsed` parameter, however, corresponds to the result of replacing other patterns which occur within `rawText`.
-Thus if you want to replace patterns within patterns, make sure to wrap your React Components around `processed` as we did in this example. See [Configuration](#Configuration) for more on pattern intersections.
+Thus if you want to replace patterns within patterns, make sure to wrap your React Components around `processed` as we did in this example. See [Configuration and Limitations](#Configuration and Limitations) for more on pattern intersections.
 
 ## English Description
 
@@ -56,12 +56,12 @@ This complication is the reason this library exists, for if one were just replac
 
 To avoid the conundrum of replacing substrings with things that are not strings, the function supplied by this library creates a special array representation of its input string. This array cleaves the input string in such a way that the desired substring replacements become array-element replacements instead.
 
-Replacing elements in this array is conundrum-free because in Javascript arrays, you can replace an element of one kind (eg `String`) with an element of any other kind (eg `React Component`).
+Replacing elements in this array is conundrum-free because in Javascript arrays, you can replace an element of one kind (eg String) with an element of any other kind (eg React Component).
 
 After replacements are enacted on this special array, the array may no longer consist entirely of strings, but it will have preserved the sequential structure of the original input string.
 
-What this means is that if substring1 precedes substring2 in the input string,
-then the elements in which (substring1 or its replacement) appears will precede the elements in which (substring2 or its replacement) appears.
+What this means is that if *substring1* precedes *substring2* in the input string,
+then the elements in which *substring1 or its replacement* appears will precede the elements in which *substring2 or its replacement* appears.
 
 Because sequential structure is thus maintained, the array can be used for displaying the contents of the original string (as enhanced by replacements).
 
@@ -79,9 +79,9 @@ As far as intersections go, patterns placed earlier in the `config` parameter wi
 Suppose that `pattern1` is placed earlier than `pattern2`.
 Suppose `instance1` and `instance2` are instances of `pattern1` and `pattern2`, respectively.
 
-If `instance1` partially intersects with `instance2`, then `instance1` will be replaced and `instance2` will be ignored.
+If `instance1` partially intersects with `instance2`, then `instance1` will be detected and replaced and `instance2` will be ignored.
 
-If `instance1` occurs within `instance2`, then again `instance1` will be replaced and `instance2` will be ignored.
+If `instance1` occurs within `instance2`, then again `instance1` will be detected and replaced and `instance2` will be ignored.
 
 If `instance1` occurs around `instance2`, then by default both will be detected and replaced (see example in [Usage](#Usage)). However, if you would like `instance2` to be ignored in this case, you can specify this with the `ignore` key in the config hash :
 ```
@@ -90,32 +90,35 @@ If `instance1` occurs around `instance2`, then by default both will be detected 
     pattern: ...
     matcherFn: ...
     ignore: ['pattern2']
+  },
+  'pattern2': {
+    ...
   }
   ...
 ```
 
 ### Text Manipulation
 
-Remember that, for a given `pattern1` , its `matcherFn` must wrap a React Component around `processed` if we desire to replace patterns that occur within `pattern1`.
+Remember that, for a given `pattern1` , its `matcherFn` must wrap a React Component around `processed` if we desire to replace other patterns that occur within an instance of `pattern1` as well.
 
 Suppose in addition to this, we want to manipulate the string that gets shown within `processed`, ie the string in which our procedure will make any further pattern replacements.
 
 In my case, this comes up when dealing with inline-code.
-I want to remove the back-ticks from strings matching the inline-code pattern once I have detected them, and before I subject them to replacements based on instances of patterns that can occur within the inline-code pattern (such as search term matches).
+I want to remove the back-ticks from strings matching the inline-code pattern once I have detected these strings, and before I subject these strings to replacements based on instances of patterns that can occur within the inline-code pattern (such as search term matches).
 
 In order to perform any such text manipulation, supply a `textFn` in the pattern's config.
-See below for the `textFn` I use with inline code blocks :
+Below is the `textFn` I use with inline code blocks :
 
 ```
   ...
   'inlineCode': {
-        pattern: /(`[\s\S]+?`)/ig,
-        textFn: function (text) {
+    pattern: /(`[\s\S]+?`)/ig,
+    textFn: function (text) {
       return text.slice(1, text.length -1);
     },
-        matcherFn: function (rawText, processed) {
-          return <code>{processed}</code>;
+    matcherFn: function (rawText, processed) {
+      return <code>{processed}</code>;
     }
-    },
+  },
   ...
 ```
