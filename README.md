@@ -83,7 +83,7 @@ If `instance1` partially intersects with `instance2`, then `instance1` will be d
 
 If `instance1` occurs within `instance2`, then again `instance1` will be detected and replaced and `instance2` will be ignored.
 
-If `instance1` occurs around `instance2`, then by default both will be detected and replaced (see example in [Usage](#Usage)). However, if you would like `instance2` to be ignored in this case, you can specify this with the `ignore` key in the config hash :
+If `instance1` occurs around `instance2`, then by default both will be detected and replaced (see example in [Usage](#usage)). However, if you would like `instance2` to be ignored in this case, you can specify this with the `ignore` key in the config hash :
 ```js
   ...
   'pattern1': {
