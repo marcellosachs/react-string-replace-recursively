@@ -42,7 +42,7 @@ var parent = (
 Note that the `matcherFn` has two parameters : `rawText` and `processed`.
 The `rawText` corresponds to the section of the string which matches the pattern.
 The `processsed` parameter, however, corresponds to the result of replacing other patterns which occur within `rawText`.
-Thus if you want to replace patterns within patterns, make sure to wrap your React Components around `processed` as we did in this example. See [Configuration and Limitations](##Configuration and Limitations) for more on pattern intersections.
+Thus if you want to replace patterns within patterns, make sure to wrap your React Components around `processed` as we did in this example. See [Configurationand Limitations](#Configuration-and-Limitations) for more on pattern intersections.
 
 ## English Description
 
