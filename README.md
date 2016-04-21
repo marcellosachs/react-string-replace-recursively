@@ -1,26 +1,119 @@
 # React Pattern Replace
 
-This library is for replacing substrings of a string that match a particular pattern with something else.
-I use it in particular for swapping substrings with React components.
-For example, I use it to replace substrings matching the 'hashtag' pattern with React Link components from the React Router library.
-
-The word *replace* is used loosely here because in a strict sense you can't *replace* a substring with something that is not a string.
-A string cannot have constituent parts that are not also strings themselves.
-
-This complication is the reason this library exists, for if one were just replacing substrings with things that were also strings, one could get away with using Javscript's native String.Prototype.replace method.
-
-To avoid the conundrum of replacing substrings with things that are not strings, the function supplied by this library creates a special array representation of its input string.
-This array cleaves the input string in such a way that the desired substring replacements become array-element replacements instead.
-
-Replacing elements in this array is conundrum-free because in JS arrays, you can replace an element of one kind (eg `String`) with an element of any other kind (eg `React Component`).
+## Installation
+`npm install react-pattern-replace --save`
 
 
-After replacements are enacted on this special array, the array may no longer consist entirely of strings, though it will have preserved the sequential structure of the original input string.
+## Usage
+```
+var reactPatternReplace = require('react-pattern-replace');
+var config = {
+    'hashTag': {
+       pattern: /(#[a-z\d][\w-]*)/ig,
+       matcherFn: function (rawText, processed) {
+         return <Link to={"tags/" + rawText}>{processed}</Link>
+      }
+    },
+  'searchTerm': {
+    pattern: /(chair)/ig,
+    matcherFn: function () {
+      return <span className='search-term-match'>{processed}</span>
+    }
+  }
+};
+
+var inputString = "what a great #chairman he is";
+var result = reactPatternReplace(config)(inputString);
+var parent = <ParentComponent>{result}</ParentComponent>;
+```
+This would amount to doing :
+```
+var result = (
+  <ParentComponent>
+    ["what a great",
+     <Link to={"tags/#chairman"}>
+       <span className='search-term-match'>chair</span>
+       man
+     </Link>]
+  </ParentComponent>
+);
+```
+
+Note that the `matcherFn` has two parameters : `rawText` and `processed`.
+The `rawText` corresponds to the section of the string which matches the pattern.
+The `processsed` parameter, however, corresponds to the result of replacing other patterns which occur within `rawText`.
+Thus if you want to replace patterns within patterns, make sure to wrap your React Components around `processed` as we did in this example. See [Configuration](#Configuration) for more on pattern intersections.
+
+## English Description
+
+This library is for replacing substrings of a string that match a particular pattern with a [React](https://facebook.github.io/react) Component.
+
+For example, I use it to replace substrings matching the 'hashtag' pattern with React Link components from the [react-router](https://github.com/reactjs/react-routerReact) library.
+
+The word *replace* is used loosely here because in a strict sense you can't *replace* a substring with something that is not a string. A string cannot have constituent parts that are not also strings themselves.
+
+This complication is the reason this library exists, for if one were just replacing substrings with things that were also strings, one could get away with using Javscript's native `String.Prototype.replace` method.
+
+To avoid the conundrum of replacing substrings with things that are not strings, the function supplied by this library creates a special array representation of its input string. This array cleaves the input string in such a way that the desired substring replacements become array-element replacements instead.
+
+Replacing elements in this array is conundrum-free because in Javascript arrays, you can replace an element of one kind (eg `String`) with an element of any other kind (eg `React Component`).
+
+After replacements are enacted on this special array, the array may no longer consist entirely of strings, but it will have preserved the sequential structure of the original input string.
 
 What this means is that if substring1 precedes substring2 in the input string,
 then the elements in which (substring1 or its replacement) appears will precede the elements in which (substring2 or its replacement) appears.
 
 Because sequential structure is thus maintained, the array can be used for displaying the contents of the original string (as enhanced by replacements).
 
-In React, this is a simple affair - one needs simply place the array within another component :
+In React, this is a simple affair - one needs simply place the resulting array within another component :
 ```<ParentComponent>{array}</ParentComponent>```
+
+
+## Configuration and Limitations
+
+### Pattern Intersections
+As far as intersections go, patterns placed earlier in the `config` parameter will be prioritized.
+
+Suppose that `pattern1` is placed earlier than `pattern2`.
+Suppose `instance1` and `instance2` are instances of `pattern1` and `pattern2`, respectively.
+
+If `instance1` partially intersects with `instance2`, then `instance1` will be replaced and `instance2` will be ignored.
+
+If `instance1` occurs within `instance2`, then again `instance1` will be replaced and `instance2` will be ignored.
+
+If `instance1` occurs around `instance2`, then by default both will be detected and replaced (see example in [Usage](#Usage)). However, if you would like `instance2` to be ignored in this case, you can specify this with the `ignore` key in the config hash :
+```
+  ...
+  'pattern1': {
+    pattern: ...
+    matcherFn: ...
+    ignore: ['pattern2']
+  }
+  ...
+```
+
+### Text Manipulation
+
+Remember that, for a given `pattern1` , its `matcherFn` must wrap a React Component around `processed` if we desire to replace patterns that occur within `pattern1`.
+
+Suppose in addition to this, we want to manipulate the string that gets shown within `processed`, ie the string in which our procedure will make any further pattern replacements.
+
+In my case, this comes up when dealing with inline-code.
+I want to remove the back-ticks from strings matching the inline-code pattern once I have detected them, and before I subject them to replacements based on instances of patterns that can occur within the inline-code pattern (such as search term matches).
+
+In order to perform any such text manipulation, supply a `textFn` in the pattern's config.
+See below for the `textFn` I use with inline code blocks :
+
+```
+  ...
+  'inlineCode': {
+        pattern: /(`[\s\S]+?`)/ig,
+        textFn: function (text) {
+      return text.slice(1, text.length -1);
+    },
+        matcherFn: function (rawText, processed) {
+          return <code>{processed}</code>;
+    }
+    },
+  ...
+```
