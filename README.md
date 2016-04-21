@@ -28,12 +28,12 @@ var parent = <ParentComponent>{result}</ParentComponent>;
 ```
 This would amount to doing :
 ```
-var result = (
+var parent = (
   <ParentComponent>
     ["what a great",
      <Link to={"tags/#chairman"}>
-       <span className='search-term-match'>chair</span>
-       man
+       [<span className='search-term-match'>chair</span>,
+        "man"]
      </Link>]
   </ParentComponent>
 );
@@ -52,7 +52,7 @@ For example, I use it to replace substrings matching the 'hashtag' pattern with 
 
 The word *replace* is used loosely here because in a strict sense you can't *replace* a substring with something that is not a string. A string cannot have constituent parts that are not also strings themselves.
 
-This complication is the reason this library exists, for if one were just replacing substrings with things that were also strings, one could get away with using Javscript's native `String.Prototype.replace` method.
+This complication is the reason this library exists, for if one were just replacing substrings with things that were also strings, one could get away with using Javscript's native [String.Prototype.replace](http://www.w3schools.com/jsref/jsref_replace.asp) method.
 
 To avoid the conundrum of replacing substrings with things that are not strings, the function supplied by this library creates a special array representation of its input string. This array cleaves the input string in such a way that the desired substring replacements become array-element replacements instead.
 
@@ -66,7 +66,9 @@ then the elements in which (substring1 or its replacement) appears will precede 
 Because sequential structure is thus maintained, the array can be used for displaying the contents of the original string (as enhanced by replacements).
 
 In React, this is a simple affair - one needs simply place the resulting array within another component :
-```<ParentComponent>{array}</ParentComponent>```
+```
+<ParentComponent>{array}</ParentComponent>
+```
 
 
 ## Configuration and Limitations
