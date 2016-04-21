@@ -46,7 +46,7 @@ Thus if you want to replace patterns within patterns, make sure to wrap your Rea
 
 ## English Description
 
-This library is for replacing substrings of a string that match a particular pattern with a [React](https://facebook.github.io/react) Component.
+This library is for replacing substrings of a string that match a particular pattern with a [React](https://facebook.github.io/react) Component, taking special care to account for patterns that occur within other patterns (see [Configuration and Limitations](#configuration-and-limitations) for more on pattern intersections).
 
 For example, I use it to replace substrings matching the 'hashtag' pattern with React Link components from the [react-router](https://github.com/reactjs/react-routerReact) library.
 
