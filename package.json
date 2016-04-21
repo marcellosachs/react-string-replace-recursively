@@ -22,7 +22,8 @@
     "expression",
     "pattern",
     "regex",
-    "match"
+    "match",
+    "recursively"
   ],
   "author": "Marcello Sachs <marcello.sachs@gmail.com> (https://github.com/marcellosachs)",
   "license": "MIT",

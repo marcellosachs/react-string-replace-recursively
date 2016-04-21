@@ -1,12 +1,12 @@
-# React Pattern Replace
+# React String Replace Recursively
 
 ## Installation
-`npm install react-pattern-replace --save`
+`npm install react-string-replace-recursively --save`
 
 
 ## Usage
 ```js
-var reactPatternReplace = require('react-pattern-replace');
+var reactStringReplace = require('react-string-replace-recursively');
 var config = {
   'hashTag': {
     pattern: /(#[a-z\d][\w-]*)/ig,
@@ -22,7 +22,7 @@ var config = {
 };
 
 var inputString = "I appreciate a good #chairback I must say";
-var result = reactPatternReplace(config)(inputString);
+var result = reactStringReplace(config)(inputString);
 var parent = <ParentComponent>{result}</ParentComponent>;
 ```
 This would amount to doing :
