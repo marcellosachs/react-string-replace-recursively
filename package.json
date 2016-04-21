@@ -1,7 +1,7 @@
 {
-  "name": "patternReplacer",
+  "name": "react-replace",
   "version": "0.1.14",
-  "description": "more abstract version of javascript's .replace method useful for replacing substrings with React components",
+  "description": "replace substrings matching certain patterns with React Components (for example, replace substrings resembling urls with React anchor Components)",
   "main": "index.js",
   "scripts": {
     "test": "mocha --compilers js:babel-core/register 'test/**/*.@(js|jsx)'",
@@ -19,6 +19,8 @@
     "reactjs",
     "regular",
     "expression",
+    "pattern",
+    "string",
     "regex",
     "match"
   ],

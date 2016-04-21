@@ -1,4 +1,4 @@
-# patternReplace
+# React Replace
 
 This library is for replacing substrings of a string that match a particular pattern with something else.
 I use it in particular for swapping substrings with React components.
@@ -23,4 +23,4 @@ then the elements in which (substring1 or its replacement) appears will precede 
 Because sequential structure is thus maintained, the array can be used for displaying the contents of the original string (as enhanced by replacements).
 
 In React, this is a simple affair - one needs simply place the array within another component :
-```<ParentComponent>{array}</ParentComponent>```.
+```<ParentComponent>{array}</ParentComponent>```
