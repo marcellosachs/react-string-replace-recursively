@@ -5,7 +5,7 @@
 
 
 ## Usage
-```
+```js
 var reactPatternReplace = require('react-pattern-replace');
 var config = {
   'hashTag': {
@@ -26,7 +26,7 @@ var result = reactPatternReplace(config)(inputString);
 var parent = <ParentComponent>{result}</ParentComponent>;
 ```
 This would amount to doing :
-```
+```js
 var parent = (
   <ParentComponent>
     ["I appreciate a good",
@@ -42,7 +42,7 @@ var parent = (
 Note that the `matcherFn` has two parameters : `rawText` and `processed`.
 The `rawText` corresponds to the section of the string which matches the pattern.
 The `processsed` parameter, however, corresponds to the result of replacing other patterns which occur within `rawText`.
-Thus if you want to replace patterns within patterns, make sure to wrap your React Components around `processed` as we did in this example. See [Configuration and Limitations](#Configuration and Limitations) for more on pattern intersections.
+Thus if you want to replace patterns within patterns, make sure to wrap your React Components around `processed` as we did in this example. See [Configuration and Limitations](##Configuration and Limitations) for more on pattern intersections.
 
 ## English Description
 
@@ -66,7 +66,7 @@ then the elements in which *substring1 or its replacement* appears will precede 
 Because sequential structure is thus maintained, the array can be used for displaying the contents of the original string (as enhanced by replacements).
 
 In React, this is a simple affair - one needs simply place the resulting array within another component :
-```
+```js
 <ParentComponent>{array}</ParentComponent>
 ```
 
@@ -84,7 +84,7 @@ If `instance1` partially intersects with `instance2`, then `instance1` will be d
 If `instance1` occurs within `instance2`, then again `instance1` will be detected and replaced and `instance2` will be ignored.
 
 If `instance1` occurs around `instance2`, then by default both will be detected and replaced (see example in [Usage](#Usage)). However, if you would like `instance2` to be ignored in this case, you can specify this with the `ignore` key in the config hash :
-```
+```js
   ...
   'pattern1': {
     pattern: ...
@@ -109,7 +109,7 @@ I want to remove the back-ticks from strings matching the inline-code pattern on
 In order to perform any such text manipulation, supply a `textFn` in the pattern's config.
 Below is the `textFn` I use with inline code blocks :
 
-```
+```js
   ...
   'inlineCode': {
     pattern: /(`[\s\S]+?`)/ig,
