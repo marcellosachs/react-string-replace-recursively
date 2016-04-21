@@ -1,4 +1,4 @@
-# React Replace
+# React Pattern Replace
 
 This library is for replacing substrings of a string that match a particular pattern with something else.
 I use it in particular for swapping substrings with React components.
