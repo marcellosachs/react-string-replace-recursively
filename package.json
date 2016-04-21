@@ -1,6 +1,6 @@
 {
   "name": "react-replace",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "description": "replace substrings matching certain patterns with React Components (for example, replace substrings resembling urls with React anchor Components)",
   "main": "index.js",
   "scripts": {
