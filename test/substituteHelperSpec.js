@@ -1,19 +1,15 @@
-// import { expect } from '../test_helper';
-// import substituteHelper from '../../app/bundles/HelloWorld/modules/substituteHelper';
-// import _ from 'lodash';
-
 const expect = require('chai').expect
 const substituteHelper = require('../lib/substituteHelper')
 const _ = require('lodash')
 
 describe('substituteHelper', function () {
   it('works in trivial case', function () {
-      const input = 'great';
-      const pattern = '#';
-      const matcherFn = _.identity
-      const nonMatcherFn = _.identity
-      const result = substituteHelper(input, pattern, matcherFn, nonMatcherFn)
-      expect(result).to.deep.equal([input]);
+    const input = 'great';
+    const pattern = '#';
+    const matcherFn = _.identity
+    const nonMatcherFn = _.identity
+    const result = substituteHelper(input, pattern, matcherFn, nonMatcherFn)
+    expect(result).to.deep.equal([input]);
   })
 
   it('works in non-trivial case', function () {

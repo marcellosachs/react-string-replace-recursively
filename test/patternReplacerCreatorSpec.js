@@ -2,7 +2,8 @@ const expect = require('chai').expect;
 const _ = require('lodash')
 const patternReplacerCreator = require('../lib/patternReplacerCreator')
 
-describe('recursiveTextProcessor', function () {
+describe('patternReplacerCreator', function () {
+
   const _hashTagFn = function (rawText, processed) {
     return {hashtag: processed}
   }
@@ -23,7 +24,6 @@ describe('recursiveTextProcessor', function () {
       matcherFn: _hashTagFn
     }
   }
-
 
   it('works in trivial case', function () {
     const inputText = ''

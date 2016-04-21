@@ -16,6 +16,6 @@ module.exports = function(text, pattern, matcherFn, nonMatcherFn, rightFlankNonM
     } else {
       next = matcherFn(ele)
     }
-    return _.chain(acc).push(next).value()
+    return [...acc, next]
   }, [])
 }
