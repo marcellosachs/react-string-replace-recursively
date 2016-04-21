@@ -1,6 +1,6 @@
 {
   "name": "react-string-replace-recursively",
-  "version": "0.1.19",
+  "version": "0.1.20",
   "description": "replace substrings matching certain patterns with React Components (for example, replace substrings resembling urls with React anchor Components)",
   "main": "index.js",
   "scripts": {
