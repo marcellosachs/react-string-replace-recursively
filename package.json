@@ -4,7 +4,7 @@
   "description": "This is for replacing substrings matching certain patterns with React Components (for example, replace substrings resembling urls with React anchor Components). Patterns that occur within other patterns can also be detected and replaced (recursive replacements).",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --compilers js:babel-core/register 'test/**/*.@(js|jsx)'",
+    "test": "npm run build && mocha --compilers js:babel-core/register 'test/**/*.@(js|jsx)'",
     "build": "babel src -d lib"
   },
   "repository": {
@@ -29,9 +29,9 @@
   "author": "Marcello Sachs <marcello.sachs@gmail.com> (https://github.com/marcellosachs)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/marcellosachs/replacer/issues"
+    "url": "https://github.com/marcellosachs/react-string-replace-recursively/issues"
   },
-  "homepage": "https://github.com/marcellosachs/replacer#readme",
+  "homepage": "https://github.com/marcellosachs/react-string-replace-recursively#readme",
   "devDependencies": {
     "babel-cli": "^6.7.5",
     "babel-core": "^6.7.6",

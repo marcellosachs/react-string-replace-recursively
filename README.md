@@ -15,7 +15,7 @@ var config = {
   },
   'searchTerm': {
     pattern: /(chair)/ig,
-    matcherFn: function () {
+    matcherFn: function (rawText, processed) {
       return <span className='search-term-match'>{processed}</span>
     }
   }

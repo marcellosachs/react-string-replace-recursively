@@ -8,7 +8,7 @@ const patternReplacerCreator = function(config) {
     const patternIds = _.keys(remnantConfig)
 
     if (patternIds.length === 0) {
-      return inputText
+      return [inputText]
     } else {
       const headId = patternIds[0]
       const headValue = remnantConfig[headId]

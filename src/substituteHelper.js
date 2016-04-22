@@ -3,9 +3,9 @@ const _  = require('lodash');
 const _isEven = n => n % 2 === 0
 
 
-module.exports = function(text, pattern, matcherFn, nonMatcherFn, rightFlankNonMatcherFn=_.identity) {
+module.exports = function(text, pattern, matcherFn, nonMatcherFn, rightFlankNonMatcherFn) {
   const arr = text.split(pattern)
-  return _.reduce(arr, function (acc, ele, i) {
+  return  _.reduce(arr, function (acc, ele, i) {
     let next;
     if (_isEven(i)) {
       if (i > 0) {
@@ -13,9 +13,9 @@ module.exports = function(text, pattern, matcherFn, nonMatcherFn, rightFlankNonM
       } else {
         next = nonMatcherFn(ele)
       }
+      return [...acc, ...next] // essentially a flatten
     } else {
-      next = matcherFn(ele)
+      return [...acc, matcherFn(ele)]
     }
-    return [...acc, next]
   }, [])
 }

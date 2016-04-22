@@ -28,17 +28,14 @@ describe('patternReplacerCreator', function () {
   it('works in trivial case', function () {
     const inputText = ''
     const result = patternReplacerCreator(config)(inputText)
-    const expected = ''
+    const expected = ['']
     expect(result).to.deep.equal(expected)
   })
 
-  // it('works in simple case', function () {
-  //   const arrOfPairs = [
-  //     {pattern: /(#[a-z\d][\w-]*)/ig, matcherFn: _hashFn}
-  //   ]
-  //   const inputText = "how #great this #is"
-  //   const result = patternReplacerCreator(arrOfPairs, inputText)
-  //   const expected = ['how ', {hashtag: '#great'}, ' this ', {hashtag: '#is'}, '']
-  //   expect(result).to.deep.equal(expected)
-  // })
+  it('works in simple case', function () {
+    const inputText = "how #great this #is"
+    const result = patternReplacerCreator(config)(inputText)
+    const expected = ['how ', {hashtag: ['#great']}, ' this ', {hashtag: ['#is']}, '']
+    expect(result).to.deep.equal(expected)
+  })
 })
