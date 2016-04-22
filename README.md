@@ -29,9 +29,10 @@ This would amount to doing :
 ```js
 var parent = (
   <ParentComponent>
-    ["I appreciate a good",
+    ["I appreciate a good ",
      <Link to={"tags/#chairback"}>
-       [<span className='search-term-match'>chair</span>,
+       ["#",
+        <span className='search-term-match'>chair</span>,
         "back"]
      </Link>,
      " I must say"]
