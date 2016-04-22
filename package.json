@@ -1,7 +1,7 @@
 {
   "name": "react-string-replace-recursively",
   "version": "0.1.20",
-  "description": "replace substrings matching certain patterns with React Components (for example, replace substrings resembling urls with React anchor Components)",
+  "description": "This is for replacing substrings matching certain patterns with React Components (for example, replace substrings resembling urls with React anchor Components). Patterns that occur within other patterns can also be detected and replaced (recursive replacements).",
   "main": "index.js",
   "scripts": {
     "test": "mocha --compilers js:babel-core/register 'test/**/*.@(js|jsx)'",
@@ -23,6 +23,7 @@
     "pattern",
     "regex",
     "match",
+    "react-router",
     "recursively"
   ],
   "author": "Marcello Sachs <marcello.sachs@gmail.com> (https://github.com/marcellosachs)",

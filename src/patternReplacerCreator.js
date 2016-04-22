@@ -13,11 +13,10 @@ const patternReplacerCreator = function(config) {
       const headId = patternIds[0]
       const headValue = remnantConfig[headId]
 
-      const toIgnore = headValue.ignore || [];
-      const tail = _.omit(remnantConfig, [headId, ...toIgnore])
+      const tail = _.omit(remnantConfig, headId)
 
       const nonMatcherFn = function (text) {
-        return patternReplacer(text, tail, surroundingPatterns)
+        return patternReplacer(text, tail)
       }
 
       const rightFlankNonMatcherTextFn = headValue.rightFlankNonMatcherTextFn || _.identity;
@@ -26,8 +25,9 @@ const patternReplacerCreator = function(config) {
       const matcherFn = function (text) {
         const textFn = (headValue.textFn || _.identity)
         const newText = textFn(text)
-        const newSurroundingPatterns = [...surroundingPatterns, headId]
-        const recursiveCall = patternReplacer(newText, tail, newSurroundingPatterns)
+        const toIgnore = headValue.ignore || [];
+        const matcherTail = _.omit(tail, toIgnore)
+        const recursiveCall = patternReplacer(newText, matcherTail)
         return headValue.matcherFn(newText, recursiveCall)
       }
       return substituteHelper(inputText, headValue.pattern, matcherFn, nonMatcherFn, rightFlankNonMatcherFn)
