@@ -9,13 +9,13 @@ module.exports = function(text, pattern, matcherFn, nonMatcherFn, rightFlankNonM
     let next;
     if (_isEven(i)) {
       if (i > 0) {
-        next = rightFlankNonMatcherFn(ele)
+        next = rightFlankNonMatcherFn(ele, i)
       } else {
-        next = nonMatcherFn(ele)
+        next = nonMatcherFn(ele, i)
       }
       return [...acc, ...next] // essentially a flatten
     } else {
-      return [...acc, matcherFn(ele)]
+      return [...acc, matcherFn(ele, i)]
     }
   }, [])
 }
