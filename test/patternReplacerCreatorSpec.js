@@ -1,5 +1,4 @@
 const expect = require('chai').expect;
-const _ = require('lodash')
 const patternReplacerCreator = require('../lib/patternReplacerCreator')
 
 describe('patternReplacerCreator', function () {

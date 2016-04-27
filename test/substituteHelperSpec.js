@@ -1,6 +1,5 @@
 const expect = require('chai').expect
 const substituteHelper = require('../lib/substituteHelper')
-const _ = require('lodash')
 
 describe('substituteHelper', function () {
   it('works in trivial case', function () {
@@ -16,7 +15,7 @@ describe('substituteHelper', function () {
   it('works in non-trivial case', function () {
     const input = 'how #great yes \nits #nice'
     const pattern = /(#[a-z\d][\w-]*)/ig // pattern for hashtag
-    const matcherFn = function (input) { return {match: _.toUpper(input)} };
+    const matcherFn = function (input) { return {match: input.toUpperCase()} };
     const nonMatcherFn = function (input) { return [input] }
     const result = substituteHelper(input, pattern, matcherFn, nonMatcherFn, nonMatcherFn)
     const expected = ['how ', {match: '#GREAT'}, ' yes \nits ', {match: '#NICE'}, '']

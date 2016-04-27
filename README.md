@@ -10,13 +10,13 @@ var reactStringReplace = require('react-string-replace-recursively');
 var config = {
   'hashTag': {
     pattern: /(#[a-z\d][\w-]*)/ig,
-    matcherFn: function (rawText, processed) {
-    return <Link to={"tags/" + rawText}>{processed}</Link>
+    matcherFn: function (rawText, processed, key) {
+    return <Link key={key} to={"tags/" + rawText}>{processed}</Link>
   },
   'searchTerm': {
     pattern: /(chair)/ig,
-    matcherFn: function (rawText, processed) {
-      return <span className='search-term-match'>{processed}</span>
+    matcherFn: function (rawText, processed, key) {
+      return <span key={key} className='search-term-match'>{processed}</span>
     }
   }
 };
@@ -30,9 +30,9 @@ This would amount to doing :
 var parent = (
   <ParentComponent>
     ["I appreciate a good ",
-     <Link to={"tags/#chairback"}>
+     <Link key={'0-1'} to={"tags/#chairback"}>
        ["#",
-        <span className='search-term-match'>"chair"</span>,
+        <span key={'0-1-1'} className='search-term-match'>"chair"</span>,
         "back"]
      </Link>,
      " I must say"]
@@ -40,10 +40,13 @@ var parent = (
 );
 ```
 
-Note that the `matcherFn` has two parameters : `rawText` and `processed`.
+Note that the `matcherFn` has three parameters : `rawText`, `processed` and `key`.
 The `rawText` corresponds to the section of the string which matches the pattern.
 The `processsed` parameter, however, corresponds to the result of replacing other patterns which occur within `rawText`.
 Thus if you want to replace patterns within patterns, make sure to wrap your React Components around `processed` as we did in this example. See [Configuration and Limitations](#configuration-and-limitations) for more on pattern intersections.
+
+The `key` is a string that will be unique for any substring of `inputString` that gets replaced.
+Be sure to include it within the `key` prop of the returned React component as we did in this example, for React asks that components in an array are provided with unique keys.
 
 ## English Description
 
