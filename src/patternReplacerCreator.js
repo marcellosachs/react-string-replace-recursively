@@ -28,12 +28,6 @@ const patternReplacerCreator = function(config) {
         return patternReplacer(text, tail, newRowKey)
       }
 
-      const rightFlankNonMatcherTextFn = headValue.rightFlankNonMatcherTextFn || identity;
-      const rightFlankNonMatcherFn = function (text, i) {
-        const x = rightFlankNonMatcherTextFn(text)
-        return nonMatcherFn(x, i)
-      }
-
       const matcherFn = function (text, i) {
         const textFn = (headValue.textFn || identity)
         const newText = textFn(text)
@@ -44,7 +38,7 @@ const patternReplacerCreator = function(config) {
         const recursiveCall = patternReplacer(newText, matcherTail, newRowKey)
         return headValue.matcherFn(newText, recursiveCall, newRowKey)
       }
-      return substituteHelper(inputText, headValue.pattern, matcherFn, nonMatcherFn, rightFlankNonMatcherFn)
+      return substituteHelper(inputText, headValue.pattern, matcherFn, nonMatcherFn)
     }
   }
 }
