@@ -107,11 +107,12 @@ Remember that, for a given `pattern1` , its `matcherFn` must wrap a React Compon
 
 Suppose in addition to this, we want to manipulate the string that gets shown within `processed`, ie the string in which our procedure will make any further pattern replacements.
 
-In my case, this comes up when dealing with inline-code.
-I want to remove the back-ticks from strings matching the inline-code pattern once I have detected these strings, and before I subject these strings to replacements based on instances of patterns that can occur within the inline-code pattern (such as search term matches).
+For example, suppose our regular expression for inline code happened to capture the surrounding back-ticks. We can use a regular expression that doesn't do this, but for the sake of example, let's suppose we're using one that does.
 
-In order to perform any such text manipulation, supply a `textFn` in the pattern's config.
-Below is the `textFn` I use with inline code blocks :
+In this case, we'd want to remove those back-ticks from strings matching the pattern once those strings are detected, and before they are subjected to replacements based on instances of patterns that can occur within the inline-code pattern (such as search term matches).
+
+In order to perform a text manipulation like this, supply a `textFn` in the pattern's config.
+Below is the `textFn` that would be used with inline-code in the hypothetical example :
 
 ```js
   ...
