@@ -1,6 +1,6 @@
 {
   "name": "react-string-replace-recursively",
-  "version": "0.1.26",
+  "version": "0.1.27",
   "description": "replace strings that match a particular pattern with a React Component, recursively",
   "main": "index.js",
   "scripts": {
