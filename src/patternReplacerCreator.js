@@ -14,13 +14,11 @@ const patternReplacerCreator = function(config) {
       return [rowKey, '-', i].join('')
     }
 
-
     if (patternIds.length === 0) {
       return [inputText]
     } else {
       const headId = patternIds[0]
       const headValue = remnantConfig[headId]
-
       const tail = omit(remnantConfig, headId)
 
       const nonMatcherFn = function (text, i) {
@@ -33,7 +31,6 @@ const patternReplacerCreator = function(config) {
         const newText = textFn(text)
         const toIgnore = headValue.ignore || [];
         const matcherTail = omit(tail, toIgnore)
-
         const newRowKey = createNewRowKey(i)
         const recursiveCall = patternReplacer(newText, matcherTail, newRowKey)
         return headValue.matcherFn(newText, recursiveCall, newRowKey)
