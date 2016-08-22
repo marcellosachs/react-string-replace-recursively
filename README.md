@@ -1,5 +1,6 @@
 # React String Replace Recursively
 
+[![npm](https://img.shields.io/npm/dt/react-string-replace-recursively.svg?maxAge=2592000)]()
 ## Installation
 `npm install react-string-replace-recursively --save`
 
