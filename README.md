@@ -13,12 +13,13 @@ var config = {
   'hashTag': {
     pattern: /(#[a-z\d][\w-]*)/ig,
     matcherFn: function (rawText, processed, key) {
-    return <Link key={key} to={"tags/" + rawText}>{processed}</Link>
+      return <Link key={key} to={"tags/" + rawText}>{processed}</Link>;
+    }
   },
   'searchTerm': {
     pattern: /(chair)/ig,
     matcherFn: function (rawText, processed, key) {
-      return <span key={key} className='search-term-match'>{processed}</span>
+      return <span key={key} className='search-term-match'>{processed}</span>;
     }
   }
 };
